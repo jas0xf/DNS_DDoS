@@ -1,0 +1,1 @@
+dig +notcp +bufsize=4096 +ignore cisco.com TXT @61.61.180.215

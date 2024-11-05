@@ -1,0 +1,3 @@
+protocol="dns" && port="53" && banner="dnsmasq"
+
+## protocol="dns" && port="53" && banner="dnsmasq" && region="TW"
