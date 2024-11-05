@@ -1,19 +1,3 @@
-# DNS DDoS
-**This is a tool for educational purpose**
-***
-
-## Description
-Using the mechanism of Extended DNS, we can get *1232 bytes of response with UDP query within 100 bytes.
-*1232 bytes is suggested by 2020 DNS flag day. Thus all common DNS services, such as DNSMasq, Unbound, PowerDNS, Bind, etc, set it as default.
-
-the feature of UDP makes it easy to spoof the source IP address, which is the key to DDoS attack.
-
-Port 53 are usually open for DNS service, so it can be launched easily.
-Tons of DNS services are opened to the public, according to FoFa search engine, there are 6 million DNS services opened to the public in East Asia.
-
-Theoretically, we can launch 1 GBps attack with 100 MBps upload bandwidth via 100k DNS services.
-
-
 # DNS DDoS Amplification Tool
 
 For educational purposes only
