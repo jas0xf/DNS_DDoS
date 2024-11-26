@@ -1,5 +1,7 @@
 # DNS DDoS Amplification Tool
 
+![](./Figure.png)
+
 For educational purposes only
 ## Description
 
